@@ -6,8 +6,9 @@
     <title>Grúas Mau | Asistencia y Transporte Pesado en Guanacaste</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* === VARIABLES DE MARCA === */
         :root {
-            --primary: #fbb03b;
+            --primary: #fbb03b; 
             --primary-hover: #e59a2a;
             --dark-bg: #121212;
             --card-bg: #1e1e1e;
@@ -21,6 +22,7 @@
         html { scroll-behavior: smooth; }
         body { background-color: var(--dark-bg); color: var(--text-light); padding-bottom: 70px; line-height: 1.6; }
 
+        /* === ENCABEZADO FIJO Y LOGO AJUSTADO === */
         header { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 10px 5%; background-color: rgba(18, 18, 18, 0.95);
@@ -28,7 +30,15 @@
             position: sticky; top: 0; z-index: 1000;
         }
         .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo-container img { height: 60px; border-radius: 50%; border: 2px solid var(--primary); box-shadow: 0 0 10px rgba(251, 176, 59, 0.3); }
+        /* Ajuste del tamaño del logo */
+        .logo-container img { 
+            width: 65px; 
+            height: 65px; 
+            object-fit: cover; /* Evita que se distorsione */
+            border-radius: 50%; 
+            border: 2px solid var(--primary); 
+            box-shadow: 0 0 10px rgba(251, 176, 59, 0.3); 
+        }
         .brand-text { display: flex; flex-direction: column; }
         .brand-text h1 { font-size: 1.4rem; font-style: italic; color: var(--primary); margin: 0; text-transform: uppercase; letter-spacing: 1px; }
         .brand-text span { font-size: 0.8rem; color: var(--text-muted); }
@@ -36,14 +46,53 @@
         .header-phones a { color: var(--text-light); text-decoration: none; font-weight: bold; transition: color 0.3s; }
         .header-phones a:hover { color: var(--primary); }
 
+        /* === HERO SECTION CON CARRUSEL === */
         .hero { 
-            background: linear-gradient(to bottom, rgba(18,18,18,0.7), rgba(18,18,18,1)), url('221052.jpg') center/cover no-repeat; 
-            min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;
+            position: relative;
+            min-height: 80vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            padding: 20px;
+            overflow: hidden;
         }
-        .hero h2 { font-size: 3rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; text-shadow: 2px 2px 10px #000; }
-        .hero h2 span { color: var(--primary); }
-        .hero p { font-size: 1.3rem; color: var(--text-muted); margin-bottom: 30px; max-width: 600px; }
-        .btn-main { background: var(--primary); color: #000; padding: 15px 35px; text-decoration: none; font-size: 1.2rem; font-weight: bold; border-radius: 30px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 5px 15px rgba(251, 176, 59, 0.4); }
+        
+        /* Contenedor del Carrusel */
+        .carousel {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+        /* Filtro oscuro para que las letras se lean bien */
+        .carousel::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(18,18,18,0.6), rgba(18,18,18,1));
+            z-index: 2;
+        }
+        .slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* Contenido encima del Carrusel */
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+        .hero-content h2 { font-size: 3.2rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; text-shadow: 2px 2px 10px #000; }
+        .hero-content h2 span { color: var(--primary); }
+        .hero-content p { font-size: 1.3rem; color: var(--text-muted); margin-bottom: 30px; max-width: 600px; text-shadow: 1px 1px 5px #000;}
+        .btn-main { display: inline-block; background: var(--primary); color: #000; padding: 15px 35px; text-decoration: none; font-size: 1.2rem; font-weight: bold; border-radius: 30px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 5px 15px rgba(251, 176, 59, 0.4); }
         .btn-main:hover { transform: translateY(-3px); background-color: var(--primary-hover); }
 
         .coverage-banner { background: var(--primary); color: #000; text-align: center; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -89,13 +138,13 @@
         .card h3 { color: var(--text-light); margin-bottom: 15px; font-size: 1.4rem; text-transform: uppercase; }
         .card p { color: var(--text-muted); }
 
+        /* === GALERÍA: 1 SOLA IMAGEN DESTACADA === */
         .gallery { padding: 60px 5%; text-align: center; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 40px; }
-        .gallery-grid img { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; border: 2px solid #333; transition: all 0.3s; opacity: 0.8; }
-        .gallery-grid img:hover { transform: scale(1.03); border-color: var(--primary); opacity: 1; z-index: 10; position: relative;}
+        .single-image-container { margin-top: 30px; }
+        .single-image-container img { width: 100%; max-width: 800px; height: auto; border-radius: 12px; border: 3px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
         footer { background: #050505; color: #fff; text-align: center; padding: 50px 20px 40px; border-top: 2px solid #222; }
-        .footer-logo { width: 100px; margin-bottom: 20px; border-radius: 50%; opacity: 0.8; }
+        .footer-logo { width: 100px; height: 100px; object-fit: cover; margin-bottom: 20px; border-radius: 50%; opacity: 0.9; }
         .footer-phones { color: var(--primary); font-size: 1.3rem; font-weight: bold; margin: 20px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .copyright { margin-top: 30px; font-size: 0.9rem; color: #555; }
 
@@ -113,7 +162,7 @@
         .btn-call:hover { background-color: #b71c1c; }
 
         @media (max-width: 768px) {
-            .hero h2 { font-size: 2.2rem; }
+            .hero-content h2 { font-size: 2.2rem; }
             .header-phones { display: none; }
             .coverage-banner h3 { font-size: 1.4rem; }
         }
@@ -123,7 +172,8 @@
 
     <header>
         <a href="#" class="logo-container">
-            <img src="221048.jpg" alt="Logo Grúas Mau">
+            <!-- Logo principal corregido -->
+            <img src="222252.jpg" alt="Logo Grúas Mau">
             <div class="brand-text">
                 <h1>Grúas Mau</h1>
                 <span>Liberia, Guanacaste</span>
@@ -135,10 +185,20 @@
         </div>
     </header>
 
+    <!-- HERO SECTION CON CARRUSEL -->
     <section class="hero">
-        <h2>¡TU CARGA,<br> <span>NUESTRA MISIÓN!</span></h2>
-        <p>Servicio de grúa 24/7. Fuerza, experiencia y confianza para mover lo que importa.</p>
-        <a href="#cotizador" class="btn-main"><i class="fas fa-bolt"></i> Solicitar Asistencia</a>
+        <div class="carousel">
+            <!-- Estas imágenes irán rotando automáticamente -->
+            <img src="221052.jpg" class="slide active" alt="Grúa trabajando">
+            <img src="221049.jpg" class="slide" alt="Grúa en carretera">
+            <img src="221058.jpg" class="slide" alt="Rescate pesado">
+        </div>
+        
+        <div class="hero-content">
+            <h2>¡TU CARGA,<br> <span>NUESTRA MISIÓN!</span></h2>
+            <p>Servicio de grúa 24/7. Fuerza, experiencia y confianza para mover lo que importa.</p>
+            <a href="#cotizador" class="btn-main"><i class="fas fa-bolt"></i> Solicitar Asistencia</a>
+        </div>
     </section>
 
     <section class="coverage-banner">
@@ -183,7 +243,6 @@
                     <input type="text" id="vehiculo" placeholder="Ej.: Contenedor 40 pies / Cabezal International">
                 </div>
 
-                <!-- Botón que activa la función de Firebase y WhatsApp -->
                 <button type="button" class="btn-submit" onclick="enviarSolicitudFirebase()">
                     <i class="fab fa-whatsapp"></i> Enviar Pedido a WhatsApp
                 </button>
@@ -217,22 +276,18 @@
         </div>
     </section>
 
+    <!-- GALERÍA REDUCIDA A 1 SOLA IMAGEN DESTACADA -->
     <section class="gallery">
         <div class="section-header">
             <h2>Capacidad Demostrada</h2>
         </div>
-        <div class="gallery-grid">
-            <img src="221049.jpg" alt="Grúa trabajando en carretera">
-            <img src="221050.jpg" alt="Grúa levantando cabezal">
-            <img src="221053.jpg" alt="Grúa moviendo chasis">
-            <img src="221057.jpg" alt="Grúa moviendo contenedor">
-            <img src="221058.jpg" alt="Grúa de rescate trabajando">
-            <img src="221059.jpg" alt="Grúa pesada en acción">
+        <div class="single-image-container">
+            <img src="221053.jpg" alt="Grúa trabajando con chasis">
         </div>
     </section>
 
     <footer>
-        <img src="221048.jpg" alt="Grúas Mau Logo" class="footer-logo">
+        <img src="222252.jpg" alt="Grúas Mau Logo" class="footer-logo">
         <h2 style="font-style: italic; color: var(--primary);">GRÚAS MAU</h2>
         <p><i class="fas fa-map-marker-alt"></i> Sede Principal: Liberia, Guanacaste</p>
         
@@ -251,8 +306,9 @@
         </a>
     </div>
 
-    <!-- SCRIPT DE GPS -->
+    <!-- SCRIPTS -->
     <script>
+        // Lógica del GPS
         function obtenerUbicacion() {
             const btn = document.getElementById('btn-gps');
             const inputUbicacion = document.getElementById('ubicacion');
@@ -278,6 +334,17 @@
                 }
             );
         }
+
+        // Lógica del Carrusel Automático
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 4000); // Cambia la imagen cada 4 segundos
+
     </script>
 
     <!-- ENLAZANDO LA LÓGICA DE FIREBASE (app.js) -->
