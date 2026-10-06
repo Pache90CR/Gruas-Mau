@@ -22,7 +22,7 @@
         html { scroll-behavior: smooth; }
         body { background-color: var(--dark-bg); color: var(--text-light); padding-bottom: 70px; line-height: 1.6; }
 
-        /* === ENCABEZADO FIJO Y LOGO AJUSTADO === */
+        /* === ENCABEZADO FIJO Y LOGO === */
         header { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 10px 5%; background-color: rgba(18, 18, 18, 0.95);
@@ -167,7 +167,6 @@
 
     <header>
         <a href="#" class="logo-container">
-            <!-- Usando exactamente Logo_mau.jpg -->
             <img src="Logo_mau.jpg" alt="Logo Grúas Mau">
             <div class="brand-text">
                 <h1>Grúas Mau</h1>
@@ -182,10 +181,10 @@
 
     <section class="hero">
         <div class="carousel">
-            <!-- Imágenes para el carrusel -->
-            <img src="221052.jpg" class="slide active" alt="Grúa trabajando">
-            <img src="221049.jpg" class="slide" alt="Grúa en carretera">
-            <img src="221058.jpg" class="slide" alt="Rescate pesado">
+            <!-- NOTA: Las imágenes ahora apuntan a la carpeta "carrusel/" -->
+            <img src="carrusel/221052.jpg" class="slide active" alt="Grúa trabajando">
+            <img src="carrusel/221049.jpg" class="slide" alt="Grúa en carretera">
+            <img src="carrusel/221058.jpg" class="slide" alt="Rescate pesado">
         </div>
         
         <div class="hero-content">
@@ -275,12 +274,12 @@
             <h2>Capacidad Demostrada</h2>
         </div>
         <div class="single-image-container">
-            <img src="221053.jpg" alt="Grúa trabajando con chasis">
+            <!-- La foto destacada también la busca en la carpeta "carrusel/" -->
+            <img src="carrusel/221053.jpg" alt="Grúa trabajando con chasis">
         </div>
     </section>
 
     <footer>
-        <!-- Usando exactamente Logo_mau.jpg en el footer -->
         <img src="Logo_mau.jpg" alt="Grúas Mau Logo" class="footer-logo">
         <h2 style="font-style: italic; color: var(--primary);">GRÚAS MAU</h2>
         <p><i class="fas fa-map-marker-alt"></i> Sede Principal: Liberia, Guanacaste</p>
