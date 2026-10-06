@@ -30,18 +30,17 @@
             position: sticky; top: 0; z-index: 1000;
         }
         .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        /* Ajuste del tamaño del logo */
         .logo-container img { 
-            width: 65px; 
-            height: 65px; 
-            object-fit: cover; /* Evita que se distorsione */
+            width: 55px; 
+            height: 55px; 
+            object-fit: cover; 
             border-radius: 50%; 
             border: 2px solid var(--primary); 
             box-shadow: 0 0 10px rgba(251, 176, 59, 0.3); 
         }
         .brand-text { display: flex; flex-direction: column; }
-        .brand-text h1 { font-size: 1.4rem; font-style: italic; color: var(--primary); margin: 0; text-transform: uppercase; letter-spacing: 1px; }
-        .brand-text span { font-size: 0.8rem; color: var(--text-muted); }
+        .brand-text h1 { font-size: 1.3rem; font-style: italic; color: var(--primary); margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+        .brand-text span { font-size: 0.75rem; color: var(--text-muted); }
         .header-phones { display: flex; gap: 15px; }
         .header-phones a { color: var(--text-light); text-decoration: none; font-weight: bold; transition: color 0.3s; }
         .header-phones a:hover { color: var(--primary); }
@@ -59,13 +58,11 @@
             overflow: hidden;
         }
         
-        /* Contenedor del Carrusel */
         .carousel {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1;
         }
-        /* Filtro oscuro para que las letras se lean bien */
         .carousel::after {
             content: '';
             position: absolute;
@@ -84,7 +81,6 @@
             opacity: 1;
         }
 
-        /* Contenido encima del Carrusel */
         .hero-content {
             position: relative;
             z-index: 3;
@@ -138,13 +134,12 @@
         .card h3 { color: var(--text-light); margin-bottom: 15px; font-size: 1.4rem; text-transform: uppercase; }
         .card p { color: var(--text-muted); }
 
-        /* === GALERÍA: 1 SOLA IMAGEN DESTACADA === */
         .gallery { padding: 60px 5%; text-align: center; }
         .single-image-container { margin-top: 30px; }
         .single-image-container img { width: 100%; max-width: 800px; height: auto; border-radius: 12px; border: 3px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
         footer { background: #050505; color: #fff; text-align: center; padding: 50px 20px 40px; border-top: 2px solid #222; }
-        .footer-logo { width: 100px; height: 100px; object-fit: cover; margin-bottom: 20px; border-radius: 50%; opacity: 0.9; }
+        .footer-logo { width: 90px; height: 90px; object-fit: cover; margin-bottom: 20px; border-radius: 50%; opacity: 0.9; }
         .footer-phones { color: var(--primary); font-size: 1.3rem; font-weight: bold; margin: 20px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .copyright { margin-top: 30px; font-size: 0.9rem; color: #555; }
 
@@ -172,8 +167,8 @@
 
     <header>
         <a href="#" class="logo-container">
-            <!-- Logo principal corregido -->
-            <img src="222252.jpg" alt="Logo Grúas Mau">
+            <!-- Usando exactamente Logo_mau.jpg -->
+            <img src="Logo_mau.jpg" alt="Logo Grúas Mau">
             <div class="brand-text">
                 <h1>Grúas Mau</h1>
                 <span>Liberia, Guanacaste</span>
@@ -185,10 +180,9 @@
         </div>
     </header>
 
-    <!-- HERO SECTION CON CARRUSEL -->
     <section class="hero">
         <div class="carousel">
-            <!-- Estas imágenes irán rotando automáticamente -->
+            <!-- Imágenes para el carrusel -->
             <img src="221052.jpg" class="slide active" alt="Grúa trabajando">
             <img src="221049.jpg" class="slide" alt="Grúa en carretera">
             <img src="221058.jpg" class="slide" alt="Rescate pesado">
@@ -276,7 +270,6 @@
         </div>
     </section>
 
-    <!-- GALERÍA REDUCIDA A 1 SOLA IMAGEN DESTACADA -->
     <section class="gallery">
         <div class="section-header">
             <h2>Capacidad Demostrada</h2>
@@ -287,7 +280,8 @@
     </section>
 
     <footer>
-        <img src="222252.jpg" alt="Grúas Mau Logo" class="footer-logo">
+        <!-- Usando exactamente Logo_mau.jpg en el footer -->
+        <img src="Logo_mau.jpg" alt="Grúas Mau Logo" class="footer-logo">
         <h2 style="font-style: italic; color: var(--primary);">GRÚAS MAU</h2>
         <p><i class="fas fa-map-marker-alt"></i> Sede Principal: Liberia, Guanacaste</p>
         
@@ -306,9 +300,7 @@
         </a>
     </div>
 
-    <!-- SCRIPTS -->
     <script>
-        // Lógica del GPS
         function obtenerUbicacion() {
             const btn = document.getElementById('btn-gps');
             const inputUbicacion = document.getElementById('ubicacion');
@@ -335,7 +327,6 @@
             );
         }
 
-        // Lógica del Carrusel Automático
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         
@@ -343,11 +334,9 @@
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }, 4000); // Cambia la imagen cada 4 segundos
-
+        }, 4000);
     </script>
 
-    <!-- ENLAZANDO LA LÓGICA DE FIREBASE (app.js) -->
     <script type="module" src="app.js"></script>
 </body>
 </html>
