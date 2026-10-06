@@ -24,13 +24,14 @@ window.enviarSolicitudFirebase = async function() {
     const destino = document.getElementById('destino').value;
     const vehiculo = document.getElementById('vehiculo').value;
 
+    // AQUI USAMOS LA NUEVA ALERTA PROFESIONAL
     if (!servicio || !ubicacion) {
-        alert("Por favor, indícanos 'Qué necesita' y la 'Ubicación'.");
+        window.mostrarAlerta("Por favor, indícanos 'Qué necesita' y la 'Ubicación' para poder enviarte la grúa.", "warning");
         return;
     }
 
     const btnSubmit = document.querySelector('.btn-submit');
-    btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registrando en la nube...';
+    btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Conectando...';
     btnSubmit.disabled = true;
 
     try {
@@ -56,15 +57,14 @@ window.enviarSolicitudFirebase = async function() {
         const telefono = "50688755921";
         const urlWhatsApp = `https://wa.me/${telefono}?text=${mensaje}`;
         
-        // Abrir WhatsApp
+        // Abrir WhatsApp y mostrar alerta de éxito
         window.open(urlWhatsApp, '_blank');
-
-        alert("¡Solicitud registrada con éxito! Te estamos redirigiendo a WhatsApp.");
+        window.mostrarAlerta("¡Solicitud enviada con éxito! Revisa tu WhatsApp.", "success");
+        
         document.getElementById('form-asistencia').reset();
         
     } catch (error) {
         console.error("Error al guardar en Firebase: ", error);
-        alert("Hubo un problema con la base de datos, pero te abriremos el WhatsApp de inmediato.");
         
         // Resguardo: si la red falla, de igual forma abre el WhatsApp
         const telefono = "50688755921";
