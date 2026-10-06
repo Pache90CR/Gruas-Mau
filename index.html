@@ -62,6 +62,7 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1;
+            background-color: #000; /* Fondo negro mientras cargan las fotos */
         }
         .carousel::after {
             content: '';
@@ -180,12 +181,8 @@
     </header>
 
     <section class="hero">
-        <div class="carousel">
-            <!-- NOTA: Las imágenes ahora apuntan a la carpeta "carrusel/" -->
-            <img src="carrusel/221052.jpg" class="slide active" alt="Grúa trabajando">
-            <img src="carrusel/221049.jpg" class="slide" alt="Grúa en carretera">
-            <img src="carrusel/221058.jpg" class="slide" alt="Rescate pesado">
-        </div>
+        <!-- El contenedor está vacío porque JavaScript pondrá las fotos aquí automáticamente -->
+        <div class="carousel" id="carrusel-contenedor"></div>
         
         <div class="hero-content">
             <h2>¡TU CARGA,<br> <span>NUESTRA MISIÓN!</span></h2>
@@ -274,8 +271,8 @@
             <h2>Capacidad Demostrada</h2>
         </div>
         <div class="single-image-container">
-            <!-- La foto destacada también la busca en la carpeta "carrusel/" -->
-            <img src="carrusel/221053.jpg" alt="Grúa trabajando con chasis">
+            <!-- Esta foto SIEMPRE debe llamarse "destacada.jpg" y estar en la carpeta "carrusel" -->
+            <img src="carrusel/destacada.jpg" alt="Trabajo destacado Grúas Mau">
         </div>
     </section>
 
@@ -299,7 +296,9 @@
         </a>
     </div>
 
+    <!-- SCRIPT DE AUTOMATIZACIÓN DE CARRUSEL Y GPS -->
     <script>
+        // 1. Lógica del GPS
         function obtenerUbicacion() {
             const btn = document.getElementById('btn-gps');
             const inputUbicacion = document.getElementById('ubicacion');
@@ -326,16 +325,48 @@
             );
         }
 
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        
-        setInterval(() => {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }, 4000);
+        // 2. Lógica del Carrusel Automático Inteligente
+        const carruselContenedor = document.getElementById('carrusel-contenedor');
+        let contadorImagenes = 1;
+        let slidesArray = [];
+
+        function cargarSiguienteImagen() {
+            let img = new Image();
+            img.src = `carrusel/${contadorImagenes}.jpg`;
+            img.className = contadorImagenes === 1 ? 'slide active' : 'slide';
+            img.alt = `Grúas Mau Trabajo ${contadorImagenes}`;
+            
+            // Si la foto existe y carga correctamente
+            img.onload = function() {
+                carruselContenedor.appendChild(img);
+                slidesArray.push(img);
+                contadorImagenes++;
+                cargarSiguienteImagen(); // Intenta cargar el siguiente número
+            };
+            
+            // Si la foto no existe (llegó al final de las que subiste)
+            img.onerror = function() {
+                if (slidesArray.length > 1) {
+                    iniciarRotacionCarrusel(); // Empieza a girar las fotos
+                }
+            };
+        }
+
+        function iniciarRotacionCarrusel() {
+            let currentSlide = 0;
+            setInterval(() => {
+                slidesArray[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slidesArray.length;
+                slidesArray[currentSlide].classList.add('active');
+            }, 4000); // Cambia cada 4 segundos
+        }
+
+        // Arrancar el proceso de buscar fotos al abrir la página
+        cargarSiguienteImagen();
+
     </script>
 
+    <!-- ENLAZANDO LA LÓGICA DE FIREBASE (app.js) -->
     <script type="module" src="app.js"></script>
 </body>
 </html>
