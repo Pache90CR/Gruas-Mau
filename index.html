@@ -87,9 +87,18 @@
         .single-image-container { margin-top: 30px; }
         .single-image-container img { width: 100%; max-width: 800px; height: auto; border-radius: 12px; border: 3px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
+        /* === FOOTER Y REDES SOCIALES === */
         footer { background: #050505; color: #fff; text-align: center; padding: 50px 20px 40px; border-top: 2px solid #222; }
         .footer-logo { width: 90px; height: 90px; object-fit: cover; margin-bottom: 20px; border-radius: 50%; opacity: 0.9; }
         .footer-phones { color: var(--primary); font-size: 1.3rem; font-weight: bold; margin: 20px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        
+        .social-media { margin: 40px auto; max-width: 250px; text-align: left; }
+        .social-media h3 { font-size: 1.3rem; color: var(--text-light); margin-bottom: 10px; font-weight: normal; }
+        .social-media hr { border: 0; height: 1px; background: #444; margin-bottom: 20px; }
+        .social-media a { display: flex; align-items: center; gap: 12px; color: var(--text-light); text-decoration: none; font-size: 1.2rem; margin-bottom: 15px; transition: color 0.3s; }
+        .social-media a:hover { color: var(--primary); }
+        .social-media i { font-size: 1.5rem; }
+
         .copyright { margin-top: 30px; font-size: 0.9rem; color: #555; }
 
         .bottom-bar { position: fixed; bottom: 0; left: 0; width: 100%; background-color: var(--card-bg); padding: 12px 20px; display: flex; justify-content: center; gap: 15px; border-top: 1px solid #333; z-index: 100; box-shadow: 0 -5px 10px rgba(0,0,0,0.5); }
@@ -238,11 +247,22 @@
         <img src="Logo_mau.jpg" alt="Grúas Mau Logo" class="footer-logo">
         <h2 style="font-style: italic; color: var(--primary);">GRÚAS MAU</h2>
         <p><i class="fas fa-map-marker-alt"></i> Sede Principal: Liberia, Guanacaste</p>
+        
         <div class="footer-phones">
             <span><i class="fas fa-phone"></i> 8875-5921</span>
             <span><i class="fas fa-phone"></i> 6231-2471</span>
             <span><i class="fas fa-phone"></i> 8439-2706</span>
         </div>
+
+        <!-- SECCIÓN DE REDES SOCIALES -->
+        <div class="social-media">
+            <h3>Redes Sociales</h3>
+            <hr>
+            <!-- Enlace listo para Instagram (solo quitar el código de comentario "<!--" cuando lo ocupen) -->
+            <!-- <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a> -->
+            <a href="https://www.facebook.com/share/1BuCJDXo13/" target="_blank"><i class="fab fa-facebook-square"></i> Facebook</a>
+        </div>
+        
         <p class="copyright">&copy; 2026 Grúas Mau. Fuerza y Confianza.</p>
     </footer>
 
@@ -264,7 +284,6 @@
 
     <!-- SCRIPT DE AUTOMATIZACIÓN, ALERTAS Y GPS -->
     <script>
-        // --- FUNCIÓN GLOBAL DE ALERTA PERSONALIZADA ---
         window.mostrarAlerta = function(mensaje, tipo = 'warning') {
             document.getElementById('custom-alert-message').innerText = mensaje;
             const icon = document.getElementById('custom-alert-icon');
@@ -288,7 +307,6 @@
             document.getElementById('custom-alert').style.display = 'none';
         };
 
-        // --- LÓGICA DEL GPS ---
         function obtenerUbicacion() {
             const btn = document.getElementById('btn-gps');
             const inputUbicacion = document.getElementById('ubicacion');
@@ -309,13 +327,12 @@
                     btn.classList.add('active');
                 },
                 (error) => {
-                    mostrarAlerta("Asegúrate de tener encendido el GPS del celular o darnos permisos de ubicación.", "warning");
+                    mostrarAlerta("Asegúrate de tener encendido el GPS del celular o danos permisos de ubicación.", "warning");
                     btn.innerHTML = '<i class="fas fa-crosshairs"></i> Compartir mi ubicación GPS exacta';
                 }
             );
         }
 
-        // --- LÓGICA DEL CARRUSEL ---
         const carruselContenedor = document.getElementById('carrusel-contenedor');
         let contadorImagenes = 1;
         let slidesArray = [];
